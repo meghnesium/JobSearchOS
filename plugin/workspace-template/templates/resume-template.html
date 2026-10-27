@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{NAME}} · Resume · {{COMPANY}}</title>
+<meta name="author" content="{{NAME}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- BRAND-FONTS: /setup replaces the one fonts.googleapis.com/css2 link on the next line -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Same design tokens as the letter templates, so the pair reads as one brand.
+   BRAND: /setup edits ONLY the :root block and the BRAND-FONTS link, from profile/brand.md. */
+:root{
+  --pz:1;
+  --paper:#FFFFFF; --ink:#1A1A1A; --mute:#6B6B6B; --line:#E3E3E3;
+  --accent:#2F5BEA; --card:#F4F6FC; --dark:#1A1A1A;
+  --disp:"Poppins",Impact,"Arial Black",sans-serif;
+  --sans:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{background:#D9D9D9}
+body{margin:0;font-family:var(--sans);font-size:9pt;line-height:1.46;color:var(--ink);
+  -webkit-font-smoothing:antialiased}
+
+.page{width:calc(210mm / var(--pz));min-height:calc(297mm / var(--pz));padding:10mm;
+  margin:8mm auto;background:var(--paper);box-shadow:0 2mm 8mm rgba(0,0,0,.18);
+  position:relative;zoom:var(--pz)}
+
+.mh-name{font-family:var(--disp);font-weight:700;color:var(--accent);text-transform:uppercase;
+  font-size:26pt;line-height:.9;letter-spacing:-.03em;margin:0;max-width:90mm}
+
+.bio{background:var(--card);border-left:1mm solid var(--accent);border-radius:0 .8mm .8mm 0;
+  padding:3mm 5mm;margin:4mm 0 6mm;font-size:9pt;line-height:1.5}
+
+.grid{display:grid;grid-template-columns:2fr 1fr;gap:8mm;margin-top:5mm}
+
+.eyebrow{font-size:7pt;font-weight:600;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 3mm}
+
+.role{margin-bottom:5mm;break-inside:avoid}
+.role h3{margin:0;font-size:10pt;font-weight:600}
+.role .co{font-size:8.6pt;color:var(--mute);margin:.5mm 0 2mm}
+.role ul{margin:0;padding-left:4mm}
+.role li{font-size:8.3pt;line-height:1.42;margin-bottom:1.4mm}
+
+.side h4{font-size:8.4pt;font-weight:600;margin:0 0 1.5mm}
+.side .block{margin-bottom:5mm}
+.side p, .side .contact{font-size:8pt;line-height:1.5;color:var(--mute);margin:0}
+.side .contact a{color:var(--ink);font-weight:500;text-decoration:none;border-bottom:.5pt solid var(--accent)}
+.tags{display:flex;flex-wrap:wrap;gap:1.5mm}
+.tag{font-size:7pt;background:var(--card);border-radius:8mm;padding:.8mm 2.2mm;color:var(--ink)}
+
+.footnote{font-size:7.3pt;color:var(--mute);font-style:italic;margin-top:4mm}
+
+@media screen{
+  .toolbar{position:fixed;right:6mm;bottom:6mm}
+  .btn{background:var(--accent);color:#fff;border:none;padding:3mm 6mm;border-radius:20mm;
+    font-family:var(--sans);font-size:10pt;font-weight:600;cursor:pointer;
+    box-shadow:0 2mm 6mm rgba(0,0,0,.28)}
+  .btn:hover{background:var(--ink)}
+}
+@media print{
+  @page{size:A4;margin:0}
+  html{background:#fff}
+  .page{margin:0;box-shadow:none}
+  .toolbar{display:none!important}
+  .bio,.tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<!--
+HOW THIS TEMPLATE WORKS
+Only {{BIO_HEADER}} is rewritten per application (with the ad's Top 2 asks woven in).
+Every other placeholder is filled ONCE by /setup from profile/identity.md and
+profile/bio-and-portfolio.md, then stays static and verified. Skills must not edit the
+static sections when producing a tailored resume.
+
+Static placeholders:
+  {{NAME}}  {{COMPANY}} (target company, used in the <title> only)
+  {{EXPERIENCE_BLOCKS}}  repeated blocks of:
+     <div class="role"><h3>Title</h3><div class="co">Employer · Period</div><ul><li>...</li></ul></div>
+  {{FOOTNOTE}}  optional line, e.g. link to the full history
+  {{CONTACT_BLOCK}}  <div>email</div><div><a href="...">site</a></div> ...
+  {{EDUCATION}}  <h4>Degree</h4><p>School · Years</p> blocks
+  {{SKILLS}}  <span class="tag">Skill</span> items
+  {{EXTRA_BLOCKS}}  optional sidebar blocks (teaching, community, languages), each:
+     <div class="block"><div class="eyebrow">Heading</div><p>...</p></div>
+-->
+
+<div class="page">
+  <h1 class="mh-name">{{NAME}}</h1>
+
+  <div class="bio">{{BIO_HEADER}}</div>
+
+  <div class="grid">
+    <div class="main">
+      <div class="eyebrow">Experience</div>
+
+      {{EXPERIENCE_BLOCKS}}
+
+      <p class="footnote">{{FOOTNOTE}}</p>
+    </div>
+
+    <div class="side">
+      <div class="block contact">
+        {{CONTACT_BLOCK}}
+      </div>
+
+      <div class="block">
+        <div class="eyebrow">Education</div>
+        {{EDUCATION}}
+      </div>
+
+      <div class="block">
+        <div class="eyebrow">Expertise</div>
+        <div class="tags">
+          {{SKILLS}}
+        </div>
+      </div>
+
+      {{EXTRA_BLOCKS}}
+    </div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <button class="btn" onclick="window.print()">Export PDF</button>
+</div>
+</body>
+</html>

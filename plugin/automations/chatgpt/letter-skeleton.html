@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{NAME}} · Cover letter · {{COMPANY}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<!-- BRAND-FONTS: replace the next link with your fonts (from your brand block) -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* BRAND: change only these values (from your brand block) */
+:root{--paper:#FFFFFF;--ink:#1A1A1A;--mute:#6B6B6B;--line:#E3E3E3;--accent:#2F5BEA;--card:#F4F6FC;
+  --disp:"Poppins",Impact,sans-serif;--sans:"Poppins",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}html{background:#D9D9D9}
+body{margin:0;font-family:var(--sans);font-size:10pt;line-height:1.55;color:var(--ink)}
+.page{width:210mm;min-height:297mm;padding:16mm;margin:8mm auto;background:var(--paper);box-shadow:0 2mm 8mm rgba(0,0,0,.18)}
+h1{font-family:var(--disp);font-weight:700;font-size:22pt;margin:0;color:var(--accent);text-transform:uppercase}
+.role{color:var(--mute);font-size:9pt;margin-bottom:6mm}.meta{display:flex;justify-content:space-between;border-bottom:.5pt solid var(--line);padding-bottom:3mm;margin-bottom:6mm;font-size:9.5pt}
+.meta b{font-family:var(--disp)}.meta .co{color:var(--accent)}
+p{margin:0 0 3.5mm}.sign{font-family:var(--disp);font-weight:700;margin-top:6mm}
+.foot{margin-top:12mm;border-top:.5pt dotted var(--line);padding-top:2mm;font-size:7.5pt;color:var(--mute)}
+@media screen{.toolbar{position:fixed;right:6mm;bottom:6mm}.btn{background:var(--accent);color:#fff;border:none;padding:3mm 6mm;border-radius:20mm;font:600 10pt var(--sans);cursor:pointer;box-shadow:0 2mm 6mm rgba(0,0,0,.28)}}
+@media print{@page{size:A4;margin:0}html{background:#fff}.page{margin:0;box-shadow:none}.toolbar{display:none!important}}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>{{NAME}}</h1>
+  <div class="role">{{ROLE_TITLE}} &middot; {{CONTACT_LINE}}</div>
+  <div class="meta"><div>Applying for <b>{{ROLE}}</b> at <span class="co">{{COMPANY}}</span></div><div>{{DATE}}</div></div>
+  <p>{{GREETING}}</p>
+  <p>{{OPENING}}</p>
+  <p>{{BODY_1}}</p>
+  <p>{{BODY_2}}</p>
+  <p>{{CLOSE}}</p>
+  <p>{{CLOSING_LINE}}</p>
+  <div class="sign">{{NAME}}</div>
+  <div class="foot">{{EMAIL}} &middot; {{COMPANY}} &middot; {{DATE}}</div>
+</div>
+<div class="toolbar"><button class="btn" onclick="window.print()">Export PDF</button></div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JobSearchOS brand picker</title>
+<style>
+:root{--bg:#fbfaf8;--card:#fff;--ink:#1a1a1a;--mute:#667;--line:#e4e1dc;--accent:#2f5bea}
+@media (prefers-color-scheme:dark){:root{--bg:#14171c;--card:#1b2028;--ink:#eceff4;--mute:#9aa4b2;--line:#2a313c;--accent:#7aa2ff}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+main{max-width:1000px;margin:0 auto;padding:24px 16px 60px}h1{font-size:24px;margin:0 0 4px}.lede{color:var(--mute);margin:0 0 18px}
+.wrap{display:grid;gap:16px;grid-template-columns:minmax(260px,340px) 1fr}@media(max-width:760px){.wrap{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+label{display:block;font-size:13px;color:var(--mute);margin:10px 0 4px}label:first-child{margin-top:0}
+input[type=text],select{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+.row{display:flex;gap:8px;align-items:center}.row input[type=color]{width:44px;height:34px;padding:0;border:1px solid var(--line);border-radius:8px;background:none}
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}.pre{border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:13px;cursor:pointer;background:var(--bg);color:var(--ink)}
+.sw{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+#prev{border:1px solid var(--line);border-radius:6px;padding:26px 28px;min-height:420px}
+#prev .eb{font-size:10px;letter-spacing:.17em;text-transform:uppercase;font-weight:600}#prev h2{margin:2px 0 0;font-size:28px;text-transform:uppercase;line-height:1.05}
+#prev .role{font-size:12px;margin:2px 0 14px}#prev .ap{font-size:16px;font-weight:700;margin:6px 0 8px;padding-bottom:8px}
+#prev .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;font-size:11px;margin:10px 0 14px}#prev .facts b{display:block;font-size:9px;letter-spacing:.12em;text-transform:uppercase}
+#prev p{font-size:12.5px;margin:0 0 10px}#prev .band{border-left:3px solid;padding:8px 10px;font-size:12px;margin:10px 0}
+#prev .btn{display:inline-block;color:#fff;padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600}
+pre{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;font-size:12px;overflow:auto;margin:8px 0}
+button.copy{background:var(--accent);color:#fff;border:0;border-radius:8px;padding:9px 14px;font:inherit;font-weight:600;cursor:pointer}
+.small{font-size:13px;color:var(--mute)}.warn{font-size:13px;margin-top:6px}
+</style>
+</head>
+<body>
+<main>
+<h1>Brand picker</h1>
+<p class="lede">Choose the colours and fonts for your cover letters and resume, see them on a live preview, then copy the result into <code>profile/brand.md</code> (or paste it into <code>/setup</code> when it asks). Nothing leaves your computer.</p>
+<div class="wrap">
+ <div class="card">
+  <label>Start from a preset</label><div class="presets" id="presets"></div>
+  <label for="accent">Accent colour (name, rules, buttons)</label><div class="row"><input type="color" id="accent"><input type="text" id="accentT"></div>
+  <label for="paper">Paper colour</label><div class="row"><input type="color" id="paper"><input type="text" id="paperT"></div>
+  <label for="ink">Text colour</label><div class="row"><input type="color" id="ink"><input type="text" id="inkT"></div>
+  <label for="disp">Display font (name and headings)</label><select id="disp"></select>
+  <label for="body">Body font</label><select id="body"></select>
+  <label for="size">Paper size</label><select id="size"><option>A4</option><option>Letter</option></select>
+  <p class="small">Muted text, lines, card tint and dark are worked out for you from these three colours.</p>
+  <div id="contrast" class="warn"></div>
+ </div>
+ <div>
+  <div class="card"><div id="prev">
+   <div class="eb" id="pe">Cover letter</div><h2 id="pn">Your Name</h2><div class="role" id="pr">Your title</div>
+   <div class="ap" id="pa">Applying for Product Manager at <span id="pc">Example Co</span></div>
+   <div class="facts"><div><b>Experience</b>9 years in your field</div><div><b>What I do</b>One line about you</div><div><b>Impact area</b>What you bring</div></div>
+   <p>Hello Example Co team, this is how body text will look in your letter. Short paragraphs, plain words, one number with its caveat.</p>
+   <div class="band" id="pb"><b>What I did about it</b><br>The last clause is the only bold text, <strong id="ps">and it carries the number.</strong></div>
+   <span class="btn" id="pbtn">Export PDF</span>
+  </div></div>
+  <div class="card" style="margin-top:12px"><b>Copy this into <code>profile/brand.md</code></b>
+   <pre id="out"></pre><button class="copy" id="copy">Copy</button> <span class="small" id="msg"></span>
+   <p class="small">Fonts are loaded from Google Fonts, so use a family name from fonts.google.com. If you are offline the preview falls back to a system font; the letter still works.</p></div>
+ </div>
+</div>
+</main>
+<script>
+const PRESETS={
+ "Studio blue":{accent:"#2F5BEA",paper:"#FFFFFF",ink:"#1A1A1A",disp:"Poppins",body:"Poppins"},
+ "Forest":{accent:"#0F766E",paper:"#FAF7F2",ink:"#17211F",disp:"Lora",body:"Source Sans 3"},
+ "Terracotta":{accent:"#C2410C",paper:"#FDF9F4",ink:"#1C1410",disp:"Fraunces",body:"Inter"},
+ "Graphite":{accent:"#111827",paper:"#FFFFFF",ink:"#111827",disp:"Inter",body:"Inter"},
+ "Plum":{accent:"#7C3AED",paper:"#FBFAFF",ink:"#1E1B2E",disp:"DM Serif Display",body:"DM Sans"},
+ "Sea":{accent:"#0369A1",paper:"#F8FBFD",ink:"#0F1B24",disp:"Merriweather",body:"Open Sans"}};
+const FONTS=["Poppins","Inter","Lora","Source Sans 3","Fraunces","DM Sans","DM Serif Display","Merriweather","Open Sans","Roboto","Work Sans","IBM Plex Sans","Playfair Display","Libre Baskerville","Space Grotesk","Manrope","Nunito Sans","Bricolage Grotesque","Montserrat","Raleway"];
+const $=id=>document.getElementById(id);
+FONTS.forEach(f=>{["disp","body"].forEach(s=>{const o=document.createElement("option");o.textContent=f;$(s).appendChild(o)})});
+Object.keys(PRESETS).forEach(k=>{const b=document.createElement("button");b.className="pre";b.innerHTML=`<span class="sw" style="background:${PRESETS[k].accent}"></span>${k}`;b.onclick=()=>{set(PRESETS[k])};$("presets").appendChild(b)});
+const hex=c=>/^#[0-9a-f]{6}$/i.test(c);
+const rgb=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16));
+const toHex=a=>"#"+a.map(v=>Math.round(Math.max(0,Math.min(255,v))).toString(16).padStart(2,"0")).join("").toUpperCase();
+const mix=(a,b,t)=>{const x=rgb(a),y=rgb(b);return toHex(x.map((v,i)=>v*(1-t)+y[i]*t))};
+const lum=h=>{const [r,g,b]=rgb(h).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*r+.7152*g+.0722*b};
+const ratio=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)};
+function set(p){["accent","paper","ink"].forEach(k=>{$(k).value=p[k];$(k+"T").value=p[k]});$("disp").value=p.disp;$("body").value=p.body;render()}
+function render(){
+ const accent=$("accent").value,paper=$("paper").value,ink=$("ink").value,disp=$("disp").value,body=$("body").value;
+ const mute=mix(ink,paper,.4),line=mix(paper,ink,.1),card=mix(paper,accent,.06),dark=ink;
+ const id="pf";let l=document.getElementById(id);if(!l){l=document.createElement("link");l.id=id;l.rel="stylesheet";document.head.appendChild(l)}
+ l.href="https://fonts.googleapis.com/css2?family="+[disp,body].filter((v,i,a)=>a.indexOf(v)===i).map(f=>f.replace(/ /g,"+")+":wght@400;600;700").join("&family=")+"&display=swap";
+ const P=$("prev");P.style.background=paper;P.style.color=ink;P.style.fontFamily=`"${body}",sans-serif`;
+ P.querySelectorAll("h2,.ap").forEach(e=>e.style.fontFamily=`"${disp}",serif`);
+ $("pn").style.color=accent;$("pe").style.color=accent;$("pc").style.color=accent;$("pa").style.borderBottom="1px solid "+line;
+ $("pb").style.background=card;$("pb").style.borderColor=accent;$("pbtn").style.background=accent;P.querySelectorAll(".role").forEach(e=>e.style.color=mute);
+ const cr=ratio(accent,paper),ct=ratio(ink,paper);
+ $("contrast").innerHTML=(cr<4.5?"<span style='color:#b45309'>Accent on paper contrast is "+cr.toFixed(1)+":1. Below 4.5:1 can be hard to read in small text. Try a darker accent.</span>":"Accent contrast "+cr.toFixed(1)+":1, good.")+(ct<7?"<br><span style='color:#b45309'>Text contrast "+ct.toFixed(1)+":1, aim for 7:1.</span>":"");
+ $("out").textContent=`---\npaper: "${paper.toUpperCase()}"\nink: "${ink.toUpperCase()}"\nmute: "${mute}"\nline: "${line}"\naccent: "${accent.toUpperCase()}"\ncard: "${card}"\ndark: "${dark.toUpperCase()}"\ndisplay_font: "${disp}"\nbody_font: "${body}"\nlogo: ""\npaper_size: ${$("size").value}\n---`;
+}
+["accent","paper","ink"].forEach(k=>{$(k).oninput=()=>{$(k+"T").value=$(k).value;render()};$(k+"T").oninput=e=>{if(hex(e.target.value)){$(k).value=e.target.value;render()}}});
+["disp","body","size"].forEach(k=>$(k).onchange=render);
+$("copy").onclick=()=>{navigator.clipboard.writeText($("out").textContent).then(()=>$("msg").textContent="Copied.",()=>$("msg").textContent="Select the text and copy it by hand.")};
+set(PRESETS["Studio blue"]);
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "jobsearchos",
+  "version": "1.0.0",
+  "description": "A personal job-search operating system. /setup interviews you once and builds your own profile, voice guide, proof-project pillars and branded letter templates. /fast-letter turns a job link into a sendable letter, /log-application keeps your filing structure and tracker honest, and optional modules add deep research, warm intros, interview prep and an overnight job sweep. Nothing personal ships in the package: everything comes from your own profile folder.",
+  "author": {
+    "name": "JobSearchOS contributors"
+  },
+  "license": "MIT",
+  "keywords": [
+    "job-search",
+    "cover-letter",
+    "fast-apply",
+    "interview-prep",
+    "outreach",
+    "research",
+    "warm-intro",
+    "career"
+  ]
+}

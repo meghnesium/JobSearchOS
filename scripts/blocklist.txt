@@ -1,0 +1,3 @@
+# One term per line, matched case-insensitively. Add your own name, employers, cities, URLs.
+# This file is the only place such terms may appear, and it is excluded from the scan.
+# Maintainers: keep the real list local and out of the public repo (git update-index --skip-worktree).

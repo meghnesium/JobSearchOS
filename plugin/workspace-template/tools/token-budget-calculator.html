@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JobSearchOS token budget</title>
+<style>
+:root{--bg:#fbfaf8;--card:#fff;--ink:#1a1a1a;--mute:#667;--line:#e4e1dc;--accent:#2f6fed;--good:#1b7f4b;--warn:#b45309}
+@media (prefers-color-scheme:dark){:root{--bg:#14171c;--card:#1b2028;--ink:#eceff4;--mute:#9aa4b2;--line:#2a313c;--accent:#7aa2ff;--good:#4ade80;--warn:#fbbf24}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+main{max-width:920px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:24px;margin:0 0 4px}h2{font-size:16px;margin:28px 0 10px}p.lede{color:var(--mute);margin:0 0 20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+label{display:block;font-size:13px;color:var(--mute);margin-bottom:4px}
+input,select{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:12px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:.04em}td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+td select{padding:4px 6px}
+.big{font-size:28px;font-weight:700;font-variant-numeric:tabular-nums}.sub{color:var(--mute);font-size:13px}
+.save{color:var(--good);font-weight:600}.bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden}.bar>i{display:block;height:100%;background:var(--accent)}
+.note{font-size:13px;color:var(--mute);margin-top:12px}.warn{color:var(--warn)}
+details{margin-top:16px}summary{cursor:pointer;color:var(--accent)}
+</style>
+</head>
+<body>
+<main>
+<h1>Token budget calculator</h1>
+<p class="lede">See what a week of your job search costs before you start, and what picking the right model per phase saves. Every number is an editable estimate. Measure your own usage after a week and update the figures.</p>
+
+<h2>Your week</h2>
+<div class="card grid">
+  <div><label for="letters">Fast letters per week</label><input id="letters" type="number" min="0" value="8"></div>
+  <div><label for="deep">Deep-research companies per week</label><input id="deep" type="number" min="0" value="1"></div>
+  <div><label for="intros">Warm intros per week</label><input id="intros" type="number" min="0" value="8"></div>
+  <div><label for="prep">Interview preps per week</label><input id="prep" type="number" min="0" value="1"></div>
+  <div><label for="sweeps">Overnight sweep nights per week</label><input id="sweeps" type="number" min="0" max="7" value="4"></div>
+  <div><label for="logs">Status updates per week</label><input id="logs" type="number" min="0" value="10"></div>
+</div>
+
+<h2>Model prices (USD per million tokens, edit to match your plan)</h2>
+<div class="card">
+<table id="prices"><thead><tr><th>Model tier</th><th class="n">Input</th><th class="n">Output</th></tr></thead><tbody></tbody></table>
+<p class="note">Defaults are public list prices at the time of writing and will drift. On a subscription plan you are metered in usage limits, not dollars, but the ratio between tiers is what matters: a larger model burns your allowance several times faster for the same work.</p>
+</div>
+
+<h2>Phases and the model for each</h2>
+<div class="card">
+<table id="phases"><thead><tr><th>Phase</th><th>Model</th><th class="n">In tokens</th><th class="n">Out tokens</th><th class="n">Runs / week</th><th class="n">Cost / week</th></tr></thead><tbody></tbody></table>
+</div>
+
+<h2>Result</h2>
+<div class="grid">
+  <div class="card"><div class="sub">Your plan, per week</div><div class="big" id="week">-</div><div class="sub" id="weekTok"></div></div>
+  <div class="card"><div class="sub">Your plan, per month</div><div class="big" id="month">-</div><div class="sub">4.3 weeks</div></div>
+  <div class="card"><div class="sub">Everything on the largest model</div><div class="big" id="allbig">-</div><div class="sub" id="saveLine"></div></div>
+  <div class="card"><div class="sub">Setup, one time</div><div class="big" id="setupCost">-</div><div class="sub">small model</div></div>
+</div>
+<div class="card" style="margin-top:12px"><div class="sub" style="margin-bottom:8px">Where the week goes</div><div id="split"></div></div>
+
+<details><summary>How to cut the bill</summary>
+<ul>
+<li>Run setup and search synthesis on the small model. They are questions, templates and summarising.</li>
+<li>Write letters on the mid model. The large model rarely produces a better letter and costs several times more.</li>
+<li>Skip phases you do not need. Warm intros and interview prep are optional modules.</li>
+<li>Use the local script for the Friday filename check. It costs nothing.</li>
+<li>Set the sweep to fewer nights. One sweep a night is the biggest line item.</li>
+<li>Kill weak applications at the Decision Card. A killed application costs one turn, not two.</li>
+</ul></details>
+<p class="note">Estimates are rough: a fast letter is one consolidated search plus two turns, a sweep run covers about 40 searches and 3 to 4 drafts. Real numbers vary with the size of your profile files and the pages searched.</p>
+</main>
+<script>
+const MODELS={small:{name:"Small (Haiku-class)",i:1,o:5},mid:{name:"Mid (Sonnet-class)",i:3,o:15},large:{name:"Large (Opus-class)",i:5,o:25}};
+const PHASES=[
+ {id:"setup",name:"Setup (once)",m:"small",i:60000,o:25000,runs:()=>0,once:true},
+ {id:"fl1",name:"Fast letter, turn 1 (search and Decision Card)",m:"small",i:30000,o:2000,runs:g=>g("letters")},
+ {id:"fl2",name:"Fast letter, turn 2 (letter and dossier)",m:"mid",i:35000,o:6000,runs:g=>g("letters")},
+ {id:"deep",name:"Deep research and draft-letter",m:"mid",i:130000,o:20000,runs:g=>g("deep")},
+ {id:"intro",name:"Warm intro",m:"mid",i:30000,o:3000,runs:g=>g("intros")},
+ {id:"prep",name:"Interview prep (challenge, audience, competitive)",m:"mid",i:75000,o:12000,runs:g=>g("prep")},
+ {id:"sweep",name:"Overnight sweep run (about 4 drafts)",m:"mid",i:500000,o:60000,runs:g=>g("sweeps")},
+ {id:"log",name:"Log application",m:"small",i:8000,o:1000,runs:g=>g("logs")}
+];
+const $=id=>document.getElementById(id);
+const g=id=>Math.max(0,parseFloat($(id).value)||0);
+const state={};PHASES.forEach(p=>state[p.id]={m:p.m,i:p.i,o:p.o});
+const prices=JSON.parse(JSON.stringify(MODELS));
+function build(){
+ const pt=$("prices").tBodies[0];pt.innerHTML="";
+ for(const k in prices){const r=pt.insertRow();r.innerHTML=`<td>${prices[k].name}</td><td class="n"><input data-k="${k}" data-f="i" type="number" step="0.1" value="${prices[k].i}"></td><td class="n"><input data-k="${k}" data-f="o" type="number" step="0.1" value="${prices[k].o}"></td>`}
+ const t=$("phases").tBodies[0];t.innerHTML="";
+ PHASES.forEach(p=>{const r=t.insertRow();r.innerHTML=`<td>${p.name}</td><td><select data-p="${p.id}">${Object.keys(MODELS).map(k=>`<option value="${k}" ${state[p.id].m===k?"selected":""}>${MODELS[k].name}</option>`).join("")}</select></td><td class="n"><input data-p="${p.id}" data-f="i" type="number" value="${state[p.id].i}"></td><td class="n"><input data-p="${p.id}" data-f="o" type="number" value="${state[p.id].o}"></td><td class="n" id="runs-${p.id}">-</td><td class="n" id="cost-${p.id}">-</td>`});
+ document.querySelectorAll("input,select").forEach(e=>e.addEventListener("input",ev=>{
+  const d=ev.target.dataset;
+  if(d.k){prices[d.k][d.f]=parseFloat(ev.target.value)||0}
+  else if(d.p){if(d.f)state[d.p][d.f]=parseFloat(ev.target.value)||0;else state[d.p].m=ev.target.value}
+  calc()}));
+}
+const cost=(m,i,o,runs)=>runs*(i*prices[m].i+o*prices[m].o)/1e6;
+const money=v=>"$"+v.toFixed(v<10?2:0);
+function calc(){
+ let week=0,bigWeek=0,tok=0;const parts=[];
+ PHASES.forEach(p=>{const s=state[p.id],runs=p.runs(g);
+  const c=cost(s.m,s.i,s.o,runs);$("runs-"+p.id).textContent=p.once?"once":runs;$("cost-"+p.id).textContent=p.once?"-":money(c);
+  if(!p.once){week+=c;bigWeek+=cost("large",s.i,s.o,runs);tok+=runs*(s.i+s.o);parts.push([p.name,c])}});
+ const su=PHASES[0],sc=cost(state.setup.m,state.setup.i,state.setup.o,1);
+ $("week").textContent=money(week);$("weekTok").textContent=Math.round(tok/1000).toLocaleString()+"k tokens per week";
+ $("month").textContent=money(week*4.3);$("allbig").textContent=money(bigWeek);
+ const save=bigWeek>0?Math.round((1-week/bigWeek)*100):0;
+ $("saveLine").innerHTML=bigWeek>0?`<span class="save">You save about ${save}%</span> by matching model to phase`:"";
+ $("setupCost").textContent=money(sc);
+ const max=Math.max(...parts.map(p=>p[1]),0.0001);
+ $("split").innerHTML=parts.filter(p=>p[1]>0).sort((a,b)=>b[1]-a[1]).map(p=>`<div style="margin:6px 0"><div style="display:flex;justify-content:space-between;font-size:13px"><span>${p[0]}</span><span>${money(p[1])}</span></div><div class="bar"><i style="width:${p[1]/max*100}%"></i></div></div>`).join("")||"<span class='sub'>Nothing selected.</span>";
+}
+document.querySelectorAll("main > .card input").forEach(()=>{});
+["letters","deep","intros","prep","sweeps","logs"].forEach(id=>$(id).addEventListener("input",calc));
+build();calc();
+</script>
+</body>
+</html>

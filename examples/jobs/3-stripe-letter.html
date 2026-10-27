@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Alex Rivera · Cover letter · Stripe</title>
+<meta name="author" content="Alex Rivera">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- BRAND-FONTS: /setup replaces the one fonts.googleapis.com/css2 link on the next line -->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TRUE-TO-PDF LAYOUT
+   Screen and print use one scale, in mm and pt. What you see
+   on screen is the PDF, page for page.
+   BRAND: /setup edits ONLY the :root block below (colours, fonts)
+   and the BRAND-FONTS link above, from profile/brand.md.
+   ONE DIAL: if a page spills, drop --pz to .97 or .95.
+   ============================================================ */
+:root{
+  --pz:1;
+  --paper:#FBF8F3; --ink:#1B1A17; --mute:#6B645B; --line:#E6DFD3;
+  --accent:#0F766E; --card:#EEF6F4; --dark:#1B1A17;
+  --disp:"Fraunces",Impact,"Arial Black",sans-serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{background:#D9D9D9}
+body{margin:0;font-family:var(--sans);font-size:9pt;line-height:1.46;color:var(--ink);
+  -webkit-font-smoothing:antialiased}
+
+.page{width:calc(210mm / var(--pz));min-height:calc(297mm / var(--pz));padding:10mm;
+  margin:8mm auto;background:var(--paper);box-shadow:0 2mm 8mm rgba(0,0,0,.18);
+  position:relative;zoom:var(--pz)}
+
+p{margin:0 0 .78em}
+a{color:var(--ink);border-bottom:.5pt solid var(--accent);text-decoration:none}
+.eyebrow{font-size:7pt;font-weight:600;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 2.5mm}
+
+/* header */
+.mast{display:flex;justify-content:space-between;align-items:flex-start;gap:10mm}
+.mh-name{font-family:var(--disp);font-weight:700;color:var(--accent);text-transform:uppercase;
+  font-size:26pt;line-height:.9;letter-spacing:-.03em;margin:0;max-width:62mm}
+.mh-role{font-size:8pt;color:var(--mute);margin:2mm 0 0}
+.mh-right{text-align:right;flex-shrink:0}
+.mh-logo{width:13mm;height:auto;color:var(--ink);display:block;margin:0 0 2.5mm auto}
+.contact{font-size:8pt;line-height:1.6;color:var(--mute)}
+.contact a{color:var(--ink);font-weight:500}
+.contact .plain{color:var(--mute)}
+
+.applyrow{display:flex;justify-content:space-between;align-items:baseline;gap:8mm;margin-top:3mm}
+.applying{font-family:var(--disp);font-weight:700;font-size:12pt;letter-spacing:-.015em;line-height:1.25}
+.applying .co{color:var(--accent)}
+.date{font-size:8pt;color:var(--mute);white-space:nowrap;flex-shrink:0}
+
+.div{border:0;border-top:.5pt dotted var(--line);margin:3.4mm 0;position:relative;height:0}
+.div::after{content:"";position:absolute;left:50%;top:-.75mm;width:1.5mm;height:1.5mm;
+  border-radius:50%;background:var(--accent)}
+
+/* about: 3 columns */
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm;margin-top:3mm}
+.fact{border-top:.75pt solid var(--accent);padding-top:2mm}
+.fact dt{font-size:6.6pt;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--mute);margin-bottom:1mm}
+.fact dd{margin:0;font-size:8pt;line-height:1.4}
+
+/* letter */
+.letter p{font-size:9pt;line-height:1.46;margin-bottom:.62em}
+.greet{margin-bottom:.8em}
+.sign{font-family:var(--disp);font-weight:700;font-size:12pt;letter-spacing:-.015em;margin-top:3mm}
+
+/* challenge */
+.setup{font-size:9pt;line-height:1.46;margin:0}
+.aside{font-size:8pt;line-height:1.45;color:var(--mute);margin:3mm 0 0}
+.bands{margin-top:3.5mm}
+.band{background:var(--card);border-left:1mm solid var(--accent);border-radius:0 .8mm .8mm 0;
+  padding:2.4mm 4mm;margin-bottom:1.6mm;break-inside:avoid}
+.band h4{margin:0 0 1.2mm;font-family:var(--disp);font-weight:700;font-size:7.6pt;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.band ul{margin:0;padding-left:4.5mm}
+.band li{font-size:7.9pt;line-height:1.4;margin-bottom:.8mm}
+.band li:last-child{margin-bottom:0}
+.resolve-label{font-size:7.2pt;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin:6mm 0 2.5mm;padding-left:1mm}
+.resolve{display:flex;gap:2.5mm;align-items:flex-start;padding-left:1mm;margin-bottom:2mm}
+.resolve .arrow{color:var(--accent);font-weight:700;font-size:9pt;line-height:1.4;flex-shrink:0}
+.resolve p{margin:0;font-size:7.9pt;line-height:1.4}
+.resolve p strong{font-weight:700;color:var(--ink)}
+.caption{font-size:7.3pt;color:var(--mute);font-style:italic;margin:0}
+
+/* page 2 (optional) */
+.disclose{border-left:1mm solid var(--accent);padding:.5mm 0 .5mm 4mm;font-size:8.4pt;
+  line-height:1.55;color:var(--mute);margin:0 0 6mm}
+.proc-h{font-family:var(--disp);font-weight:700;font-size:17pt;line-height:.96;
+  letter-spacing:-.025em;margin:0 0 2.5mm;text-transform:uppercase}
+.proc-lede{font-size:8.6pt;line-height:1.55;color:var(--mute);max-width:62ch;margin:0}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;margin-top:5mm}
+.card{border:.5pt solid var(--line);border-radius:.8mm;padding:3mm;background:#fff;break-inside:avoid}
+.card .top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2.5mm}
+.card .n{font-family:var(--disp);font-weight:700;font-size:13pt;line-height:1;color:var(--line)}
+.pill{font-size:6.4pt;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+  padding:.6mm 2mm;border-radius:10mm;white-space:nowrap}
+.pill.auto{background:var(--dark);color:#fff}
+.pill.human{background:var(--accent);color:#fff}
+.pill.hybrid{background:var(--line);color:var(--dark)}
+.card h4{margin:0 0 .4mm;font-size:8.4pt;font-weight:600;letter-spacing:-.01em}
+.card .sub{font-size:7pt;color:var(--mute);margin-bottom:2mm}
+.card p{margin:0;font-size:7.7pt;line-height:1.45;color:var(--mute)}
+.card.is-human{background:var(--card);border-color:var(--accent)}
+.card.is-human .n{color:var(--accent);opacity:.45}
+
+.why{margin-top:6mm;padding-top:4mm;border-top:.5pt dotted var(--line)}
+.why .eyebrow{margin-bottom:1.8mm}
+.why p{font-size:8.4pt;line-height:1.55;color:var(--mute);max-width:68ch;margin:0}
+
+/* footer, one line, pinned to the bottom of each page */
+.foot{position:absolute;left:10mm;right:10mm;bottom:9mm;font-size:7.2pt;color:var(--mute);
+  border-top:.5pt dotted var(--line);padding-top:2mm}
+.foot a{border-bottom:none;color:var(--mute)}
+
+@media screen{
+  .toolbar{position:fixed;right:6mm;bottom:6mm}
+  .btn{background:var(--accent);color:#fff;border:none;padding:3mm 6mm;border-radius:20mm;
+    font-family:var(--sans);font-size:10pt;font-weight:600;cursor:pointer;
+    box-shadow:0 2mm 6mm rgba(0,0,0,.28)}
+  .btn:hover{background:var(--ink)}
+}
+
+@media print{
+  @page{size:A4;margin:0}
+  html{background:#fff}
+  .page{margin:0;box-shadow:none;break-after:page;page-break-after:always}
+  .page:last-of-type{break-after:auto;page-break-after:auto}
+  .toolbar{display:none!important}
+  .band,.card,.pill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  a{color:var(--ink)}
+}
+.src{font-size:6.8pt;color:var(--mute);margin:.8mm 0 3mm}
+</style>
+</head>
+<body>
+
+<!-- ============================ PAGE 1 ============================ -->
+<div class="page">
+
+  <header class="mast">
+    <div>
+      <div class="eyebrow">Cover letter</div>
+      <h1 class="mh-name">Alex Rivera</h1>
+      <div class="mh-role">Product Designer</div>
+    </div>
+    <div class="mh-right">
+      
+      <div class="contact">
+        <a href="https://example.com/alex">example.com/alex</a> &middot; <a href="https://linkedin.com/in/alex-example">linkedin.com/in/alex-example</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="applyrow">
+    <div class="applying">Applying for Product Designer, Dashboard at <span class="co">Stripe</span></div>
+    <div class="date">6 October 2026</div>
+  </div>
+
+  <hr class="div">
+
+  <section>
+    <div class="eyebrow">About me</div>
+    <dl class="facts">
+      <div class="fact"><dt>Experience</dt><dd>9 years in B2B product design, currently at Northwind Analytics</dd></div>
+      <div class="fact"><dt>What I do</dt><dd>Turn busy, many-screen products into systems people learn once and teams can extend.</dd></div>
+      <div class="fact"><dt>Potential impact area</dt><dd>Turns a growing set of screens into one system other designers can extend.</dd></div>
+    </dl>
+  </section>
+
+  <hr class="div">
+
+  <section class="letter">
+    <p class="greet">Hello Stripe team,</p>
+
+    <p>I'm looking for a team where design owns the system as well as the screens. Stripe's dashboard serves a finance lead and a support agent from the same components, which is the kind of shared structure I've spent three years building at Northwind Analytics, where I work on executive reporting today. My habit is to decide once, write it down and let others reuse it, and I would like to do that at your scale.</p>
+
+    <p>That habit started with one stubborn problem, so I picked a similar one on your side. It comes from reading how a merchant works through a disputed payment, which I enjoyed more than I expected.</p>
+  </section>
+
+  <hr class="div">
+
+  <section>
+    <div class="eyebrow">One challenge I worked through</div>
+
+    <p class="setup">A merchant opens a disputed payment and needs to decide whether to fight it or accept it. To answer, they move through the payment view, the customer view, the evidence form and the deadline list. Each page is correct on its own, and the decision lives across all four.</p>
+    <p class="src">Source: public help-centre page on responding to disputes [verify]</p>
+
+    <p class="aside">This example is from my current reporting work at Northwind, because that is where I met the same shape of problem.</p>
+
+    <div class="bands">
+      <div class="band">
+        <h4>At Stripe</h4>
+        <ul><li>Four views for one decision</li><li>Evidence and deadline live on separate pages</li></ul>
+      </div>
+      <div class="band">
+        <h4>At Northwind Analytics</h4>
+        <ul><li>One panel per decision in every Northwind report</li><li>Evidence and deadline shown side by side</li></ul>
+      </div>
+
+      <div class="resolve-label">What I did about it</div>
+      <div class="resolve">
+        <span class="arrow">&rarr;</span>
+        <p>At Northwind that panel stopped being one report's fix. It became the rule for every report after it, with no second executive version to maintain, and <strong>the next report took 3 working sessions instead of 6, by my own log over four reports (small sample, same team)</strong>.</p>
+      </div>
+
+      <p class="caption">From the outside I can only see the surface, so this is a guess about the inside.</p>
+    </div>
+  </section>
+
+  <hr class="div">
+
+  <section class="letter">
+    <p>You know your constraints better than I do: regulation, older views, a dashboard that many teams touch at once. Within those limits, I would enjoy a surface where one decision crosses four pages and the fix has to hold for a finance lead and a support agent alike. If it helps, I can walk you through how the Northwind panel was argued for and cut.</p>
+    <p>Happy to walk you through it.</p>
+    <div class="sign">Alex Rivera</div>
+  </section>
+
+  <div class="foot">alex.rivera@example.com · Stripe · 6 October 2026</div>
+</div>
+
+<!-- PAGE2-START -->
+<!-- ============================ PAGE 2 (optional) ============================ -->
+<div class="page">
+
+  <p class="disclose">This page describes how this letter was made.</p>
+
+  <section>
+    <div class="eyebrow">Process transparency</div>
+    <h2 class="proc-h">A person decided every line of this letter.</h2>
+    <p class="proc-lede">AI did the reading and the first draft. I did the choosing and the editing.</p>
+
+    <div class="cards">
+      <div class="card"><div class="top"><span class="n">01</span><span class="pill auto">Automated</span></div><h4>Research</h4><div class="sub">AI, minutes</div><p>Read the ad and public pages and drafted a first read of their problem.</p></div><div class="card is-human"><div class="top"><span class="n">02</span><span class="pill human">Human</span></div><h4>Choice</h4><div class="sub">Me, 10 minutes</div><p>Picked the project, the challenge and what to leave out.</p></div><div class="card"><div class="top"><span class="n">03</span><span class="pill hybrid">Hybrid</span></div><h4>Drafting</h4><div class="sub">AI and me</div><p>Draft against my word budgets, then three rounds of edits.</p></div><div class="card is-human"><div class="top"><span class="n">04</span><span class="pill human">Human</span></div><h4>Check and send</h4><div class="sub">Me</div><p>Checked every number against my case study and sent it myself.</p></div>
+    </div>
+
+    <div class="why">
+      <div class="eyebrow">Why am I adding this section?</div>
+      <p>I use AI to research and draft. I decide which project goes in, which challenge is worth raising and what gets cut.</p>
+    </div>
+  </section>
+
+  <div class="foot">alex.rivera@example.com · Stripe · 6 October 2026</div>
+</div>
+<!-- PAGE2-END -->
+
+<div class="toolbar">
+  <button class="btn" onclick="window.print()">Export PDF</button>
+</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "jobsearchos",
+  "owner": { "name": "JobSearchOS contributors" },
+  "plugins": [
+    {
+      "name": "jobsearchos",
+      "source": "./plugin",
+      "description": "Personal job-search operating system: /setup, /fast-letter, /log-application, optional deep research, warm intros, interview prep and an overnight sweep.",
+      "version": "1.0.0"
+    }
+  ]
+}
